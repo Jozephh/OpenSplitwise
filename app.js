@@ -57,28 +57,32 @@ splitSelect.addEventListener("change", () => {
 function render() {
   const list = document.getElementById("expense-list");
   list.innerHTML = "";
-  let joeTotal = 0, caitlinTotal = 0;
+
+  let joePaid = 0, caitlinPaid = 0;
+  let joeShouldPay = 0;
 
   expenses.forEach(e => {
     const li = document.createElement("li");
-    li.textContent = `${e.date.split("T")[0]} - ${e.payer} paid £${e.amount.toFixed(2)} for ${e.desc}`;
+    li.textContent = `${e.date.split("T")[0]} – ${e.payer} paid £${e.amount.toFixed(2)} for ${e.desc}`;
     list.appendChild(li);
 
-    const joeOwes = e.amount * e.joeShare;
-    const caitlinOwes = e.amount * (1 - e.joeShare);
+    if (e.payer === "Joe") joePaid += e.amount;
+    if (e.payer === "Caitlin") caitlinPaid += e.amount;
 
-    if (e.payer === "Joe") {
-      caitlinTotal += caitlinOwes;
-    } else if (e.payer === "Caitlin") {
-      joeTotal += joeOwes;
-    }
+    joeShouldPay += e.amount * e.joeShare;
   });
 
-  const net = joeTotal - caitlinTotal;
+  const joeBalance = joePaid - joeShouldPay;
   const output = document.getElementById("balance-output");
-  if (net > 0) output.textContent = `Caitlin owes Joe £${net.toFixed(2)}`;
-  else if (net < 0) output.textContent = `Joe owes Caitlin £${Math.abs(net).toFixed(2)}`;
-  else output.textContent = `You’re even! 🎉`;
+  const tolerance = 0.01;
+
+  if (Math.abs(joeBalance) < tolerance) {
+    output.textContent = `You’re even! 🎉`;
+  } else if (joeBalance > 0) {
+    output.textContent = `Caitlin owes Joe £${joeBalance.toFixed(2)}`;
+  } else {
+    output.textContent = `Joe owes Caitlin £${Math.abs(joeBalance).toFixed(2)}`;
+  }
 }
 
 function settleUp() {
@@ -102,7 +106,7 @@ function exportCSV() {
 
 render();
 
-// PWA support
+// Optional: PWA support
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
     .then(() => console.log("Service Worker registered"));

@@ -1,0 +1,17 @@
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background: #f9f9f9;
+}
+input, select, button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}

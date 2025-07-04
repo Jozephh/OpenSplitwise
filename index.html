@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Budget Buddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Budget Buddy</h1>
+
+    <section id="add-expense">
+      <h2>Add Expense</h2>
+      <form id="expense-form">
+        <input type="text" id="desc" placeholder="Description" required />
+        <input type="number" id="amount" placeholder="Amount" step="0.01" required />
+        <select id="payer">
+          <option value="Joe">Joe</option>
+          <option value="Caitlin">Caitlin</option>
+        </select>
+        <select id="split">
+          <option value="50">50/50</option>
+          <option value="joe">Joe pays all</option>
+          <option value="caitlin">Caitlin pays all</option>
+        </select>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section id="balance">
+      <h2>Balance</h2>
+      <p id="balance-output">Loading...</p>
+    </section>
+
+    <section id="history">
+      <h2>History</h2>
+      <ul id="expense-list"></ul>
+    </section>
+
+    <section>
+      <button onclick="settleUp()">Settle Up</button>
+      <button onclick="exportCSV()">Export CSV</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

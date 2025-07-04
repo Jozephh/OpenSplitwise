@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Budget Buddy</title>
+  <title>OpenSplitwise</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4CAF50" />
 </head>
 <body>
   <main>
-    <h1>Budget Buddy</h1>
+    <h1>OpenSplitwise</h1>
 
     <section id="add-expense">
       <h2>Add Expense</h2>
       <form id="expense-form">
         <input type="text" id="desc" placeholder="Description" required />
         <input type="number" id="amount" placeholder="Amount" step="0.01" required />
-        <select id="payer">
-          <option value="Joe">Joe</option>
-          <option value="Caitlin">Caitlin</option>
+        
+        <select id="split-mode" required>
+          <option value="joe-50">Joe paid, 50/50 split</option>
+          <option value="caitlin-50">Caitlin paid, 50/50 split</option>
+          <option value="joe-custom">Joe paid, custom split</option>
+          <option value="caitlin-custom">Caitlin paid, custom split</option>
+          <option value="joe-full">Joe paid, owed full amount</option>
+          <option value="caitlin-full">Caitlin paid, owed full amount</option>
         </select>
-        <select id="split">
-          <option value="50">50/50</option>
-          <option value="joe">Joe pays all</option>
-          <option value="caitlin">Caitlin pays all</option>
-        </select>
+
+        <div id="custom-share" style="display: none;">
+          <label>Joe’s share (0 to 1):</label>
+          <input type="number" id="joe-share" step="0.01" min="0" max="1" value="0.5" />
+        </div>
+
         <button type="submit">Add</button>
       </form>
     </section>
@@ -43,6 +51,7 @@
       <button onclick="exportCSV()">Export CSV</button>
     </section>
   </main>
+
   <script src="app.js"></script>
 </body>
 </html>

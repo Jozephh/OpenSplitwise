@@ -5,6 +5,9 @@ body {
   margin: auto;
   background: #f9f9f9;
 }
+h1, h2 {
+  color: #333;
+}
 input, select, button {
   display: block;
   margin: 0.5rem 0;
@@ -14,4 +17,20 @@ input, select, button {
 ul {
   list-style-type: none;
   padding: 0;
+}
+li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #ccc;
+}
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #45a049;
+}
+label {
+  font-size: 0.9rem;
 }
